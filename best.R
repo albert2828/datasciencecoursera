@@ -1,3 +1,4 @@
+library(dplyr)
 best <- function(state, outcome){
    ## Read outcome data   
    outcome_data <- read.csv("outcome-of-care-measures.csv", na.strings = "Not Available")

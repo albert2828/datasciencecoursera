@@ -1,3 +1,4 @@
+library(dplyr)
 rankhospital <- function(state, outcome, num){
       
   ## Read outcome data   
@@ -50,5 +51,5 @@ rankhospital <- function(state, outcome, num){
         ranked <- my_data_2[num,1]
       }
       
-      return(ranked)
+      ranked
 }
