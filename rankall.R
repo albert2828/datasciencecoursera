@@ -26,36 +26,17 @@ rankall <- function(outcome, num = "best") {
       
       my_data <- subset(outcome_data, select = c(2,7, col_num))
       state <- unique(my_data$State)
+      my_data <- arrange(my_data, my_data[,1], my_data[,3])
       
-      for (i in 1:length(state)) {
-            hospital <- c()
-            st <- state[i]
-            my_data_2 <- subset(my_data, State == st)
-            available <- sum(complete.cases(my_data_2[,2]))
-            
-            if(num == "best"){
-                  r <- my_data_2[1,1]
-            }
-            
-            else if(num == "worst"){
-                  r <- my_data_2[available,1]
-            }
-            
-            else if(is.numeric(num)==TRUE & num>available){
-                  r <- NA
-            }
-            
-            else if(is.numeric(num)==TRUE){
-                  r <- my_data_2[num,1]
-            }
-            
-            hospital <- c(hospital,r)
+      if(num == "best"){
+            num <- 1
       }
+      
+      hospital <- sapply(split(my_data,my_data$State),function(x)x[num,1])
       
       ## Return a data frame with the hospital names and the
       ## (abbreviated) state name
       
-      
-      ran_hos <- data.frame(state,hospital)
-      ran_hos
+      ranked_hos <- data.frame(state,hospital)
+      ranked_hos
 }
