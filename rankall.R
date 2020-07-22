@@ -25,9 +25,8 @@ rankall <- function(outcome, num = "best") {
       }
       
       my_data <- subset(outcome_data, select = c(2,7, col_num))
+      my_data <- arrange(my_data, my_data[,2], my_data[,3], my_data[,1])
       state <- unique(my_data$State)
-      my_data <- arrange(my_data, my_data[,2], my_data[,3])
-      
       
       if(num == "best"){
          hospital <- sapply(split(my_data,my_data$State),function(x)x[1,1])
