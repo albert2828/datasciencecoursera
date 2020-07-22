@@ -5,7 +5,7 @@ rankall <- function(outcome, num = "best") {
                                na.strings = "Not Available", stringsAsFactors = FALSE)
       outcome_names <- c("heart attack", "heart failure", "pneumonia")
       
-      ## Check that state and outcome are valid
+      ## Check that outcome is valid
       
       if(is.element(outcome,outcome_names)==FALSE){
             stop("invalid outcome")
@@ -27,7 +27,7 @@ rankall <- function(outcome, num = "best") {
       my_data <- subset(outcome_data, select = c(2,7, col_num))
       state <- unique(my_data$State)
       
-      for (i in length(state_names)) {
+      for (i in 1:length(state)) {
             hospital <- c()
             st <- state[i]
             my_data_2 <- subset(my_data, State == st)
@@ -37,20 +37,19 @@ rankall <- function(outcome, num = "best") {
                   r <- my_data_2[1,1]
             }
             
-            if(num == "worst"){
+            else if(num == "worst"){
                   r <- my_data_2[available,1]
             }
             
-            if(is.numeric(num)==TRUE & num>available){
+            else if(is.numeric(num)==TRUE & num>available){
                   r <- NA
             }
             
-            if(is.numeric(num)==TRUE){
+            else if(is.numeric(num)==TRUE){
                   r <- my_data_2[num,1]
             }
             
             hospital <- c(hospital,r)
-            hospital
       }
       
       ## Return a data frame with the hospital names and the
