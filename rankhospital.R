@@ -2,7 +2,8 @@ library(dplyr)
 rankhospital <- function(state, outcome, num){
       
   ## Read outcome data   
-      outcome_data <- read.csv("outcome-of-care-measures.csv", na.strings = "Not Available")
+      outcome_data <- read.csv("outcome-of-care-measures.csv", na.strings = "Not Available", 
+                               stringsAsFactors = FALSE)
       outcome_names <- c("heart attack", "heart failure", "pneumonia")
   
   
